@@ -1,0 +1,28 @@
+ SQLite, EF
+
+Таблица Users
+-id (PK)
+-login 
+-password(hash)
+-type (user/admin)
+
+Таблица Docs
+-id (PK)
+-name 
+-description
+-topic 
+-upload_date
+
+Таблица Visibility_Area
+-id (PK)
+-name
+
+МКМ таблица Юзеров и зон видимости (users_visibility_area)
+-id (PK)
+-users_id (FK)
+-visibility_area_id (FK) 
+
+МКМ таблица Документов и зон видимости (docs_visibility_area)
+-id (PK)
+-docs_id (FK)
+-visibility_area_id (FK) 

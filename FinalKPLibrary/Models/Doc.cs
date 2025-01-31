@@ -7,5 +7,6 @@ public class Doc
     public string Description { get; set; }
     public string Topic { get; set; }
     public DateTime UploadDate { get; set; }
-    public ICollection<DocVisibilityArea> DocVisibilityAreas { get; set; }
+    public string FilePath { get; set; } 
+    public ICollection<DocVisibilityArea> DocVisibilityAreas { get; set; }  = new List<DocVisibilityArea>();
 }

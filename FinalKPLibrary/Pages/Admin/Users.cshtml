@@ -1,0 +1,45 @@
+﻿@page
+@model UsersModel
+@{
+    ViewData["Title"] = "Users Management";
+}
+
+<h2>Users Management</h2>
+
+<h3>Add New User</h3>
+<form method="post" asp-page-handler="AddUser">
+    <div class="form-group">
+        <label for="username">Username</label>
+        <input type="text" class="form-control" id="username" name="username" required />
+    </div>
+    <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" class="form-control" id="password" name="password" required />
+    </div>
+    <button type="submit" class="btn btn-primary">Add User</button>
+</form>
+
+<h3>User List</h3>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Username</th>
+            <th>Password</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var user in Model.Users)
+        {
+            <tr>
+                <td>@user.UserName</td>
+                <td>@user.PasswordHash</td>
+                <td>
+                    <form method="post" asp-page-handler="DeleteUser" asp-route-userId="@user.Id">
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

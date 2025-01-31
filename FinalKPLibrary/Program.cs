@@ -1,15 +1,35 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Logging.ClearProviders();
+builder.Logging.AddConsole();
+builder.Logging.AddDebug();
+
 // Add services to the container.
 builder.Services.AddRazorPages(options =>
 {
+    options.Conventions.AuthorizeFolder("/Admin", "AdminOnly"); // Только админы могут доступть /Admin
     options.Conventions.AuthorizeFolder("/"); // Требовать авторизацию для всех страниц
     options.Conventions.AllowAnonymousToPage("/Index");
-    options.Conventions.AllowAnonymousToPage("/Account/Login"); // Разрешить доступ к странице входа без авторизации
+    options.Conventions.AllowAnonymousToPage("/Account/Login");
+    options.Conventions.AllowAnonymousToPage("/Account/AccessDenied");
+    options.Conventions.AllowAnonymousToPage("/Account/Logout");
+
+});
+
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("AdminOnly", policy => policy.RequireRole("admin"));
+    options.AddPolicy("AdminOnly", policy => policy.RequireRole("admin"));
+});
+
+builder.WebHost.ConfigureKestrel(serverOptions =>
+{
+    serverOptions.Limits.MaxRequestBodySize = 100 * 1024 * 1024; // 100 МБ
 });
 
 builder.Services.AddDbContext<AppDbContext>(options =>
@@ -43,6 +63,22 @@ builder.Services.AddSession(options =>
     options.Cookie.IsEssential = true;
 });
 
+builder.Services.Configure<FormOptions>(options =>
+{
+    options.MultipartBodyLengthLimit = 100 * 1024 * 1024; // 100 MB
+});
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAll", policy =>
+    {
+        policy.AllowAnyOrigin()
+              .AllowAnyMethod()
+              .AllowAnyHeader();
+    });
+});
+
+
 var app = builder.Build();
 
 using (var scope = app.Services.CreateScope())
@@ -57,6 +93,12 @@ using (var scope = app.Services.CreateScope())
         if (!await roleManager.RoleExistsAsync("admin"))
         {
             await roleManager.CreateAsync(new IdentityRole<int>("admin"));
+        }
+
+        // Создаём роль "user", если её нет
+        if (!await roleManager.RoleExistsAsync("user"))
+        {
+            await roleManager.CreateAsync(new IdentityRole<int>("user"));
         }
 
         // Проверяем, существует ли пользователь с логином "admin"
@@ -80,17 +122,21 @@ using (var scope = app.Services.CreateScope())
     catch (Exception ex)
     {
         var logger = serviceProvider.GetRequiredService<ILogger<Program>>();
-        logger.LogError(ex, "An error occurred while creating the admin user.");
+        logger.LogError(ex, "An error occurred while creating roles or admin user.");
     }
 }
 
-// Configure the HTTP request pipeline.
-if (!app.Environment.IsDevelopment())
+if (app.Environment.IsDevelopment())
+{
+    app.UseDeveloperExceptionPage();
+}
+else
 {
     app.UseExceptionHandler("/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
+
+
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
@@ -103,5 +149,5 @@ app.UseAuthorization();  // Затем авторизация
 app.UseSession(); // Подключение сессий (если они используются)
 
 app.MapRazorPages();
-
+app.UseCors("AllowAll");
 app.Run();

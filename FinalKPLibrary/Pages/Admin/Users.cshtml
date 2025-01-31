@@ -24,7 +24,7 @@
     <thead>
         <tr>
             <th>Username</th>
-            <th>Password</th>
+            <th>Visibility Area</th>
             <th>Actions</th>
         </tr>
     </thead>
@@ -32,8 +32,19 @@
         @foreach (var user in Model.Users)
         {
             <tr>
-                <td>@user.UserName</td>
-                <td>@user.PasswordHash</td>
+                <td>
+                    <a asp-page="/Admin/UserDetails" asp-route-id="@user.Id">@user.UserName</a>
+                </td>
+                <td>
+                    @if (user.UserVisibilityAreas != null && user.UserVisibilityAreas.Any())
+                    {
+                        @string.Join(", ", user.UserVisibilityAreas.Select(user => user.VisibilityArea?.Name))
+                    }
+                    else
+                    {
+                        <span>null</span>
+                    }
+                </td>
                 <td>
                     <form method="post" asp-page-handler="DeleteUser" asp-route-userId="@user.Id">
                         <button type="submit" class="btn btn-danger">Delete</button>

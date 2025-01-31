@@ -1,0 +1,42 @@
+﻿@page "{id}"
+@model UserDetailsModel
+@{
+    ViewData["Title"] = "User Details";
+}
+
+<h2>User Details</h2>
+
+<div>
+    <h3>@Model.user.UserName</h3>
+    <p><strong>Type:</strong> @Model.user.Type</p>
+</div>
+
+<h3>Visibility Areas</h3>
+<ul>
+    @foreach (var area in Model.user.UserVisibilityAreas.Select(uva => uva.VisibilityArea))
+    {
+        <li>
+            @area.Name
+            <form method="post" asp-page-handler="RemoveVisibilityArea" asp-route-userId="@Model.user.Id" asp-route-areaId="@area.Id" style="display:inline;">
+                <button type="submit" class="btn btn-danger btn-sm">Remove</button>
+            </form>
+        </li>
+    }
+</ul>
+
+<h3>Add Visibility Area</h3>
+<form method="post" asp-page-handler="AddVisibilityArea">
+    <input type="hidden" name="userId" value="@Model.user.Id" />
+    <div class="form-group">
+        <label for="areaId">Select Visibility Area:</label>
+        <select class="form-control" id="areaId" name="areaId">
+            @foreach (var area in Model.AvailableVisibilityAreas)
+            {
+                <option value="@area.Id">@area.Name</option>
+            }
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Add</button>
+</form>
+
+<a asp-page="/Admin/Users" class="btn btn-secondary">Back to List</a>

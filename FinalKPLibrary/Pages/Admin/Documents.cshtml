@@ -44,7 +44,9 @@
         @foreach (var doc in Model.Documents)
         {
             <tr>
-                <td>@doc.Name</td>
+                <td>
+                    <a asp-page="/Admin/DocumentDetails" asp-route-id="@doc.Id">@doc.Name</a>
+                </td>
                 <td>@doc.Description</td>
                 <td>@doc.Topic</td>
                 <td>@doc.UploadDate.ToString("yyyy-MM-dd HH:mm")</td>

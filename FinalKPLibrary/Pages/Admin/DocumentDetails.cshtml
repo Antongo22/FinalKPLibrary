@@ -1,0 +1,49 @@
+﻿@page "{id}"
+@model DocumentDetailsModel
+@{
+    ViewData["Title"] = "Document Details";
+}
+
+<h2>Document Details</h2>
+
+<div>
+    <h3>@Model.Doc.Name</h3>
+    <p><strong>Description:</strong> @Model.Doc.Description</p>
+    <p><strong>Topic:</strong> @Model.Doc.Topic</p>
+    <p><strong>Upload Date:</strong> @Model.Doc.UploadDate.ToString("yyyy-MM-dd HH:mm")</p>
+    <p><strong>File Path:</strong> @Model.Doc.FilePath</p>
+</div>
+
+<h3>Visibility Areas</h3>
+<ul>
+    @foreach (var area in Model.Doc.DocVisibilityAreas.Select(dva => dva.VisibilityArea))
+    {
+        <li>
+            @area.Name
+            <form method="post" asp-page-handler="RemoveVisibilityArea" asp-route-docId="@Model.Doc.Id" asp-route-areaId="@area.Id" style="display:inline;">
+                <button type="submit" class="btn btn-danger btn-sm">Remove</button>
+            </form>
+        </li>
+    }
+</ul>
+
+<h3>Add Visibility Area</h3>
+<form method="post" asp-page-handler="AddVisibilityArea">
+    <input type="hidden" name="docId" value="@Model.Doc.Id" />
+    <div class="form-group">
+        <label for="areaId">Select Visibility Area:</label>
+        <select class="form-control" id="areaId" name="areaId">
+            @foreach (var area in Model.AvailableVisibilityAreas)
+            {
+                <option value="@area.Id">@area.Name</option>
+            }
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Add</button>
+</form>
+
+<form method="post" asp-page-handler="Delete" asp-route-id="@Model.Doc.Id">
+    <button type="submit" class="btn btn-danger">Delete Document</button>
+</form>
+
+<a asp-page="/Admin/Documents" class="btn btn-secondary">Back to List</a>

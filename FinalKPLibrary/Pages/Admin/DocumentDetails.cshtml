@@ -3,9 +3,7 @@
 @{
     ViewData["Title"] = "Document Details";
 }
-
 <h2>Document Details</h2>
-
 <div>
     <h3>@Model.Doc.Name</h3>
     <p><strong>Description:</strong> @Model.Doc.Description</p>
@@ -13,7 +11,6 @@
     <p><strong>Upload Date:</strong> @Model.Doc.UploadDate.ToString("yyyy-MM-dd HH:mm")</p>
     <p><strong>File Path:</strong> @Model.Doc.FilePath</p>
 </div>
-
 <h3>Visibility Areas</h3>
 <ul>
     @foreach (var area in Model.Doc.DocVisibilityAreas.Select(dva => dva.VisibilityArea))
@@ -27,23 +24,32 @@
     }
 </ul>
 
-<h3>Add Visibility Area</h3>
-<form method="post" asp-page-handler="AddVisibilityArea">
-    <input type="hidden" name="docId" value="@Model.Doc.Id" />
-    <div class="form-group">
-        <label for="areaId">Select Visibility Area:</label>
-        <select class="form-control" id="areaId" name="areaId">
-            @foreach (var area in Model.AvailableVisibilityAreas)
-            {
-                <option value="@area.Id">@area.Name</option>
-            }
-        </select>
+@if (Model.AvailableVisibilityAreas.Any())
+{
+    <h3>Add Visibility Area</h3>
+    <form method="post" asp-page-handler="AddVisibilityArea">
+        <input type="hidden" name="docId" value="@Model.Doc.Id" />
+        <div class="form-group">
+            <label for="areaId">Select Visibility Area:</label>
+            <select class="form-control" id="areaId" name="areaId">
+                @foreach (var area in Model.AvailableVisibilityAreas)
+                {
+                    <option value="@area.Id">@area.Name</option>
+                }
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Add</button>
+    </form>
+}
+else
+{
+    <h3>Add Visibility Area</h3>
+    <div class="alert alert-warning" role="alert">
+        No available visibility areas to add.
     </div>
-    <button type="submit" class="btn btn-primary">Add</button>
-</form>
+}
 
 <form method="post" asp-page-handler="Delete" asp-route-id="@Model.Doc.Id">
     <button type="submit" class="btn btn-danger">Delete Document</button>
 </form>
-
 <a asp-page="/Admin/Documents" class="btn btn-secondary">Back to List</a>

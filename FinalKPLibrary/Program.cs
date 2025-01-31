@@ -152,5 +152,3 @@ app.UseSession(); // Подключение сессий (если они используются)
 app.MapRazorPages();
 app.UseCors("AllowAll");
 app.Run();
-
-// TODO : ошибка при добавлени пустой области видимости

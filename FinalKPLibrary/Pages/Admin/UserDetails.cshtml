@@ -3,14 +3,11 @@
 @{
     ViewData["Title"] = "User Details";
 }
-
 <h2>User Details</h2>
-
 <div>
     <h3>@Model.user.UserName</h3>
     <p><strong>Type:</strong> @Model.user.Type</p>
 </div>
-
 <h3>Visibility Areas</h3>
 <ul>
     @foreach (var area in Model.user.UserVisibilityAreas.Select(uva => uva.VisibilityArea))
@@ -24,19 +21,29 @@
     }
 </ul>
 
-<h3>Add Visibility Area</h3>
-<form method="post" asp-page-handler="AddVisibilityArea">
-    <input type="hidden" name="userId" value="@Model.user.Id" />
-    <div class="form-group">
-        <label for="areaId">Select Visibility Area:</label>
-        <select class="form-control" id="areaId" name="areaId">
-            @foreach (var area in Model.AvailableVisibilityAreas)
-            {
-                <option value="@area.Id">@area.Name</option>
-            }
-        </select>
+@if (Model.AvailableVisibilityAreas.Any())
+{
+    <h3>Add Visibility Area</h3>
+    <form method="post" asp-page-handler="AddVisibilityArea">
+        <input type="hidden" name="userId" value="@Model.user.Id" />
+        <div class="form-group">
+            <label for="areaId">Select Visibility Area:</label>
+            <select class="form-control" id="areaId" name="areaId">
+                @foreach (var area in Model.AvailableVisibilityAreas)
+                {
+                    <option value="@area.Id">@area.Name</option>
+                }
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Add</button>
+    </form>
+}
+else
+{
+    <h3>Add Visibility Area</h3>
+    <div class="alert alert-warning" role="alert">
+        No available visibility areas to add.
     </div>
-    <button type="submit" class="btn btn-primary">Add</button>
-</form>
+}
 
 <a asp-page="/Admin/Users" class="btn btn-secondary">Back to List</a>

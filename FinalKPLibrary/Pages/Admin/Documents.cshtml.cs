@@ -55,6 +55,22 @@ public class DocumentsModel : PageModel
             return RedirectToPage("/Account/AccessDenied");
         }
 
+        Documents = await _context.Docs
+           .Include(d => d.DocVisibilityAreas) // Загружаем зоны видимости
+           .ThenInclude(dva => dva.VisibilityArea) // Загружаем связанные зоны видимости
+           .ToListAsync();
+
+        if (Documents == null)
+        {
+            Documents = new List<Doc>();
+        }
+
+        if (Documents.Any(d => d.Name == name))
+        {
+            ModelState.AddModelError(string.Empty, "Документ с таким именем уже существует.");
+            return Page();
+        }
+
         if (file == null || file.Length == 0)
         {
             ModelState.AddModelError("file", "Please select a file.");

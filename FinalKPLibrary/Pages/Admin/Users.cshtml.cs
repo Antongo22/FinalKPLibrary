@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
+using System.Xml.Linq;
 
 namespace FinalKPLibrary.Pages.Admin;
 
@@ -22,7 +23,7 @@ public class UsersModel : PageModel
         {
             RedirectToPage("/Account/AccessDenied");
         }
-
+        
         Users = await _userManager.Users
         .Where(u => u.Type == "user")
         .Include(d => d.UserVisibilityAreas) 
@@ -37,12 +38,18 @@ public class UsersModel : PageModel
             RedirectToPage("/Account/AccessDenied");
         }
 
+        Users = await _userManager.Users
+        .Where(u => u.Type == "user")
+        .Include(d => d.UserVisibilityAreas)
+        .ThenInclude(uva => uva.VisibilityArea)
+        .ToListAsync();
+
         if (Users == null)
         {
             Users = new List<User>();
         }
 
-        if (Users.Any(u => u.UserName == username))
+        if (Users.Any(u => u.UserName == username) || username.ToString().Contains("admin"))
         {
             ModelState.AddModelError(string.Empty, "ѕользователь с таким именем уже существует.");
             return Page(); 

@@ -32,9 +32,22 @@ public class VisibilityAreasModel : PageModel
 
     public async Task<IActionResult> OnPostAddAsync(string name)
     {
+        VisibilityAreas = await _context.VisibilityAreas.ToListAsync();
+
         if (!User.IsInRole("admin"))
         {
             return RedirectToPage("/Account/AccessDenied");
+        }
+
+        if (VisibilityAreas == null)
+        {
+            VisibilityAreas = new List<VisibilityArea>();
+        }
+
+        if (VisibilityAreas.Any(v => v.Name == name) )
+        {
+            ModelState.AddModelError(string.Empty, "Область с таким именем уже существует.");
+            return Page();
         }
 
         var area = new VisibilityArea
@@ -54,6 +67,7 @@ public class VisibilityAreasModel : PageModel
         {
             return RedirectToPage("/Account/AccessDenied");
         }
+
 
         var area = await _context.VisibilityAreas.FindAsync(id);
         if (area != null)

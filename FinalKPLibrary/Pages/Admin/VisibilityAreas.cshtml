@@ -1,0 +1,39 @@
+﻿@page
+@model VisibilityAreasModel
+@{
+    ViewData["Title"] = "Visibility Areas Management";
+}
+
+<h2>Visibility Areas Management</h2>
+
+<h3>Add New Visibility Area</h3>
+<form method="post" asp-page-handler="Add">
+    <div class="form-group">
+        <label for="name">Visibility Area Name:</label>
+        <input type="text" class="form-control" id="name" name="name" required />
+    </div>
+    <button type="submit" class="btn btn-primary">Add</button>
+</form>
+
+<h3>Visibility Areas List</h3>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var area in Model.VisibilityAreas)
+        {
+            <tr>
+                <td>@area.Name</td>
+                <td>
+                    <form method="post" asp-page-handler="Delete" asp-route-id="@area.Id">
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

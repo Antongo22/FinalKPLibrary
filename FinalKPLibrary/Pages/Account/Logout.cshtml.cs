@@ -7,9 +7,9 @@ namespace FinalKPLibrary.Pages.Account
 {
     public class LogoutModel : PageModel
     {
-        private readonly SignInManager<User> _signInManager;
+        private readonly SignInManager<Models.User> _signInManager;
 
-        public LogoutModel(SignInManager<User> signInManager)
+        public LogoutModel(SignInManager<Models.User> signInManager)
         {
             _signInManager = signInManager;
         }

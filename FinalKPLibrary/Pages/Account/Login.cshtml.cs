@@ -2,15 +2,16 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Identity;
 using System.Threading.Tasks;
+using FinalKPLibrary.Models;
 
 namespace FinalKPLibrary.Pages.Account;
 
 
 public class LoginModel : PageModel
 {
-    private readonly SignInManager<User> _signInManager;
+    private readonly SignInManager<Models.User> _signInManager;
 
-    public LoginModel(SignInManager<User> signInManager)
+    public LoginModel(SignInManager<Models.User> signInManager)
     {
         _signInManager = signInManager;
     }

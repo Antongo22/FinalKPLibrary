@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using FinalKPLibrary.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,10 +10,18 @@ builder.Logging.ClearProviders();
 builder.Logging.AddConsole();
 builder.Logging.AddDebug();
 
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("AdminOnly", policy => policy.RequireRole("admin"));
+    options.AddPolicy("UserOnly", policy => policy.RequireRole("user"));
+});
+
+
 // Add services to the container.
 builder.Services.AddRazorPages(options =>
 {
     options.Conventions.AuthorizeFolder("/Admin", "AdminOnly"); // Только админы могут доступть /Admin
+    options.Conventions.AuthorizeFolder("/User", "UserOnly"); // Только пользователи могут доступть /User
     options.Conventions.AuthorizeFolder("/"); // Требовать авторизацию для всех страниц
 
     options.Conventions.AllowAnonymousToPage("/Index");
@@ -22,11 +31,6 @@ builder.Services.AddRazorPages(options =>
 
 });
 
-builder.Services.AddAuthorization(options =>
-{
-    options.AddPolicy("AdminOnly", policy => policy.RequireRole("admin"));
-    options.AddPolicy("AdminOnly", policy => policy.RequireRole("admin"));
-});
 
 builder.WebHost.ConfigureKestrel(serverOptions =>
 {
@@ -46,6 +50,7 @@ builder.Services.AddIdentity<User, IdentityRole<int>>(options =>
 })
 .AddEntityFrameworkStores<AppDbContext>()
 .AddDefaultTokenProviders();
+
 
 builder.Services.ConfigureApplicationCookie(options =>
 {

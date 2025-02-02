@@ -20,7 +20,7 @@ public class UserDetailsModel : PageModel
         _context = context;
     }
 
-    public User user { get; set; }
+    public Models.User user { get; set; }
     public List<VisibilityArea> AvailableVisibilityAreas { get; set; }
 
     public async Task<IActionResult> OnGetAsync(int id)

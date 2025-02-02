@@ -1,6 +1,8 @@
 ﻿using FinalKPLibrary.Models;
 using Microsoft.AspNetCore.Identity;
 
+namespace FinalKPLibrary.Models;
+
 public class User : IdentityUser<int>
 {
     public string Type { get; set; } // "user" или "admin"

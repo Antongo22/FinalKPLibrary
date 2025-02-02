@@ -8,14 +8,14 @@ namespace FinalKPLibrary.Pages.Admin;
 
 public class UsersModel : PageModel
 {
-    private readonly UserManager<User> _userManager;
+    private readonly UserManager<Models.User> _userManager;
 
-    public UsersModel(UserManager<User> userManager)
+    public UsersModel(UserManager<Models.User> userManager)
     {
         _userManager = userManager;
     }
 
-    public List<User> Users { get; set; }
+    public List<Models.User> Users { get; set; }
 
     public async Task OnGetAsync()
     {
@@ -46,7 +46,7 @@ public class UsersModel : PageModel
 
         if (Users == null)
         {
-            Users = new List<User>();
+            Users = new List<Models.User>();
         }
 
         if (Users.Any(u => u.UserName == username) || username.ToString().Contains("admin"))
@@ -56,7 +56,7 @@ public class UsersModel : PageModel
         }
 
 
-        var user = new User { UserName = username, Type = "user" };
+        var user = new Models.User { UserName = username, Type = "user" };
         var result = await _userManager.CreateAsync(user, password);
 
         if (result.Succeeded)

@@ -1,0 +1,33 @@
+﻿@page
+@model DocumentsModel
+@{
+    ViewData["Title"] = "My Documents";
+}
+
+<h2>My Documents</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Topic</th>
+            <th>Upload Date</th>
+            <th>Visibility Areas</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var doc in Model.Documents)
+        {
+            <tr>
+                <td>@doc.Name</td>
+                <td>@doc.Description</td>
+                <td>@doc.Topic</td>
+                <td>@doc.UploadDate.ToString("yyyy-MM-dd HH:mm")</td>
+                <td>
+                    @string.Join(", ", doc.DocVisibilityAreas.Select(dva => dva.VisibilityArea.Name))
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

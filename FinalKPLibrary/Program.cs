@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using FinalKPLibrary.Models;
+using Microsoft.AspNetCore.Authentication;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,6 +15,11 @@ builder.Services.AddAuthorization(options =>
 {
     options.AddPolicy("AdminOnly", policy => policy.RequireRole("admin"));
     options.AddPolicy("UserOnly", policy => policy.RequireRole("user"));
+});
+
+builder.Services.Configure<SecurityStampValidatorOptions>(options =>
+{
+    options.ValidationInterval = TimeSpan.Zero; // Проверка на каждом запросе
 });
 
 
@@ -54,13 +60,29 @@ builder.Services.AddIdentity<User, IdentityRole<int>>(options =>
 
 builder.Services.ConfigureApplicationCookie(options =>
 {
-    options.Cookie.HttpOnly = true; // Куки доступны только через HTTP
-    options.ExpireTimeSpan = TimeSpan.FromDays(7); // Время жизни кук
-    options.LoginPath = "/Account/Login"; // Путь к странице входа
-    options.AccessDeniedPath = "/Account/AccessDenied"; // Путь к странице "Доступ запрещён"
-    options.SlidingExpiration = true; // Обновление времени жизни кук при активности
-    options.Cookie.Name = "YourAppAuthCookie"; // Имя куки (опционально)
+    options.Cookie.HttpOnly = true;
+    options.ExpireTimeSpan = TimeSpan.FromDays(7);
+    options.LoginPath = "/Account/Login";
+    options.AccessDeniedPath = "/Account/AccessDenied";
+    options.SlidingExpiration = true;
+    options.Cookie.Name = "LibCookie";
+
+    options.Events = new CookieAuthenticationEvents
+    {
+        OnValidatePrincipal = async context =>
+        {
+            var userManager = context.HttpContext.RequestServices.GetRequiredService<UserManager<User>>();
+            var user = await userManager.GetUserAsync(context.Principal);
+            if (user == null)
+            {
+                // Если пользователь не найден, отклоняем principal
+                context.RejectPrincipal();
+                await context.HttpContext.SignOutAsync();
+            }
+        }
+    };
 });
+
 
 builder.Services.AddSession(options =>
 {
@@ -71,7 +93,7 @@ builder.Services.AddSession(options =>
 
 builder.Services.Configure<FormOptions>(options =>
 {
-    options.MultipartBodyLengthLimit = 100 * 1024 * 1024; // 100 MB
+    options.MultipartBodyLengthLimit = 100 * 1024 * 1024; // 100 MB 
 });
 
 builder.Services.AddCors(options =>
@@ -141,6 +163,30 @@ else
     app.UseExceptionHandler("/Error");
     app.UseHsts();
 }
+
+app.Use(async (context, next) =>
+{
+    var userManager = context.RequestServices.GetRequiredService<UserManager<User>>();
+    var signInManager = context.RequestServices.GetRequiredService<SignInManager<User>>();
+
+    var user = context.User;
+    if (user.Identity?.IsAuthenticated == true)
+    {
+        var userId = userManager.GetUserId(user);
+        if (userId != null)
+        {
+            var existingUser = await userManager.FindByIdAsync(userId);
+            if (existingUser == null)
+            {
+                await signInManager.SignOutAsync(); // Разлогинивание
+                context.Response.Redirect("/Account/Login"); // Перенаправление на страницу входа
+                return;
+            }
+        }
+    }
+
+    await next();
+});
 
 
 

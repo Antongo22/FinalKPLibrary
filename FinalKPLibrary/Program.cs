@@ -182,5 +182,4 @@ app.MapControllers();
 app.Run();
 
 
-// TODO : поис документов
 // TODO : разные языки

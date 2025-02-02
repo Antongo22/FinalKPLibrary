@@ -20,6 +20,13 @@ public class DocumentsModel : PageModel
     [BindProperty(SupportsGet = true)]
     public string? SearchQuery { get; set; }
 
+    [BindProperty(SupportsGet = true)]
+    public string SortBy { get; set; }
+
+    [BindProperty(SupportsGet = true)]
+    public string SortOrder { get; set; } = "asc";
+    public string NextSortOrder => SortOrder == "asc" ? "desc" : "asc";
+
     public async Task<IActionResult> OnGetAsync()
     {
         var query = _context.Set<Doc>().Include(d => d.DocVisibilityAreas).ThenInclude(dva => dva.VisibilityArea).AsQueryable();
@@ -33,6 +40,30 @@ public class DocumentsModel : PageModel
                 d.UploadDate.ToString().Contains(SearchQuery) ||
                 d.DocVisibilityAreas.Any(dva => dva.VisibilityArea.Name.Contains(SearchQuery))
             );
+        }
+
+        if (!string.IsNullOrWhiteSpace(SortBy))
+        {
+            query = SortOrder switch
+            {
+                "asc" => SortBy switch
+                {
+                    "Name" => query.OrderBy(d => d.Name),
+                    "Description" => query.OrderBy(d => d.Description),
+                    "Topic" => query.OrderBy(d => d.Topic),
+                    "UploadDate" => query.OrderBy(d => d.UploadDate),
+                    _ => query
+                },
+                "desc" => SortBy switch
+                {
+                    "Name" => query.OrderByDescending(d => d.Name),
+                    "Description" => query.OrderByDescending(d => d.Description),
+                    "Topic" => query.OrderByDescending(d => d.Topic),
+                    "UploadDate" => query.OrderByDescending(d => d.UploadDate),
+                    _ => query
+                },
+                _ => query
+            };
         }
 
         Documents = await query.ToListAsync();

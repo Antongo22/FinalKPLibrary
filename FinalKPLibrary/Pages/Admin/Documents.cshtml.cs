@@ -30,11 +30,19 @@ namespace FinalKPLibrary.Pages.Admin
             }
         }
 
-        public List<Doc> Documents { get; set; }
+        public List<Doc> Documents { get; set; } = new List<Doc>();
         [BindProperty(SupportsGet = true)]
-        public string SearchQuery { get; set; }
+        public string? SearchQuery { get; set; }
 
-        public async Task OnGetAsync()
+        [BindProperty(SupportsGet = true)]
+        public string SortBy { get; set; }
+
+        [BindProperty(SupportsGet = true)]
+        public string SortOrder { get; set; } = "asc";
+
+        public string NextSortOrder => SortOrder == "asc" ? "desc" : "asc";
+
+        public async Task<IActionResult> OnGetAsync()
         {
             if (!User.IsInRole("admin"))
             {
@@ -46,6 +54,7 @@ namespace FinalKPLibrary.Pages.Admin
                 .ThenInclude(dva => dva.VisibilityArea)
                 .AsQueryable();
 
+            // Поиск
             if (!string.IsNullOrWhiteSpace(SearchQuery))
             {
                 query = query.Where(d =>
@@ -56,7 +65,33 @@ namespace FinalKPLibrary.Pages.Admin
                     d.DocVisibilityAreas.Any(dva => dva.VisibilityArea.Name.Contains(SearchQuery)));
             }
 
+            // Сортировка
+            if (!string.IsNullOrWhiteSpace(SortBy))
+            {
+                query = SortOrder switch
+                {
+                    "asc" => SortBy switch
+                    {
+                        "Name" => query.OrderBy(d => d.Name),
+                        "Description" => query.OrderBy(d => d.Description),
+                        "Topic" => query.OrderBy(d => d.Topic),
+                        "UploadDate" => query.OrderBy(d => d.UploadDate),
+                        _ => query
+                    },
+                    "desc" => SortBy switch
+                    {
+                        "Name" => query.OrderByDescending(d => d.Name),
+                        "Description" => query.OrderByDescending(d => d.Description),
+                        "Topic" => query.OrderByDescending(d => d.Topic),
+                        "UploadDate" => query.OrderByDescending(d => d.UploadDate),
+                        _ => query
+                    },
+                    _ => query
+                };
+            }
+
             Documents = await query.ToListAsync();
+            return Page();
         }
 
         public async Task<IActionResult> OnPostUploadAsync(string name, string description, string topic, IFormFile file)
@@ -138,3 +173,4 @@ namespace FinalKPLibrary.Pages.Admin
         }
     }
 }
+

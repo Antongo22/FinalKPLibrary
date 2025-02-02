@@ -29,7 +29,7 @@
 
 <h3>Document List</h3>
 
-<form method="get" class="position-relative mb-3">
+<form method="get" class="position-relative">
     <div class="input-group">
         <input type="text" id="searchInput" name="searchQuery" placeholder="Search..." value="@Model.SearchQuery" class="form-control" />
         <button type="submit" class="btn btn-primary">Search</button>
@@ -40,22 +40,21 @@
 <table class="table">
     <thead>
         <tr>
-            <th>Name</th>
-            <th>Description</th>
-            <th>Topic</th>
-            <th>Upload Date</th>
+            <th><a asp-page="./Documents" asp-route-sortBy="Name" asp-route-sortOrder="@Model.NextSortOrder" asp-route-searchQuery="@Model.SearchQuery">Name</a></th>
+            <th><a asp-page="./Documents" asp-route-sortBy="Description" asp-route-sortOrder="@Model.NextSortOrder" asp-route-searchQuery="@Model.SearchQuery">Description</a></th>
+            <th><a asp-page="./Documents" asp-route-sortBy="Topic" asp-route-sortOrder="@Model.NextSortOrder" asp-route-searchQuery="@Model.SearchQuery">Topic</a></th>
+            <th><a asp-page="./Documents" asp-route-sortBy="UploadDate" asp-route-sortOrder="@Model.NextSortOrder" asp-route-searchQuery="@Model.SearchQuery">Upload Date</a></th>
             <th>File Path</th>
             <th>Visibility Areas</th>
             <th>Actions</th>
         </tr>
     </thead>
+
     <tbody>
         @foreach (var doc in Model.Documents)
         {
             <tr>
-                <td>
-                    <a asp-page="/Admin/DocumentDetails" asp-route-id="@doc.Id">@doc.Name</a>
-                </td>
+                <td><a asp-page="/Admin/DocumentDetails" asp-route-id="@doc.Id">@doc.Name</a></td>
                 <td>@doc.Description</td>
                 <td>@doc.Topic</td>
                 <td>@doc.UploadDate.ToString("yyyy-MM-dd HH:mm")</td>
@@ -81,7 +80,7 @@
 </table>
 
 <script>
-    document.addEventListener("DOMContentLoaded", function () {
+        document.addEventListener("DOMContentLoaded", function () {
         let searchInput = document.getElementById("searchInput");
         let clearSearch = document.getElementById("clearSearch");
 
@@ -95,7 +94,11 @@
         clearSearch.addEventListener("click", function () {
             searchInput.value = "";
             clearSearch.style.display = "none";
-            document.querySelector("form").submit();
+
+            let url = new URL(window.location.href);
+            url.searchParams.delete("searchQuery");
+            window.location.href = url.toString();
         });
     });
+
 </script>

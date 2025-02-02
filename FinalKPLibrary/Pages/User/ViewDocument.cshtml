@@ -1,0 +1,47 @@
+﻿@page "{id:int}"
+@model FinalKPLibrary.Pages.User.ViewDocumentModel
+@{
+    ViewData["Title"] = "View Document";
+    var fileName = System.IO.Path.GetFileName(Model.Document.FilePath);
+    var fileUrl = Url.Content($"/uploads/{fileName}");
+}
+
+<h2>@Model.Document.Name</h2>
+<p>@Model.Document.Description</p>
+<p>Uploaded: @Model.Document.UploadDate.ToString("yyyy-MM-dd HH:mm")</p>
+
+@if (Model.Document.FilePath.EndsWith(".pdf", StringComparison.OrdinalIgnoreCase))
+{
+    <object data="@fileUrl" type="application/pdf" width="100%" height="600">
+        <p>Ваш браузер не поддерживает просмотр PDF. <a href="@fileUrl">Скачать PDF</a>.</p>
+    </object>
+}
+else if (Model.Document.FilePath.EndsWith(".docx", StringComparison.OrdinalIgnoreCase))
+{
+    <div id="docx-viewer">
+        <p>Загрузка документа...</p>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.4.2/mammoth.browser.min.js"></script>
+    <script>
+        fetch("@fileUrl")
+            .then(response => response.arrayBuffer())
+            .then(arrayBuffer => {
+                return window.mammoth.convertToHtml({ arrayBuffer: arrayBuffer });
+            })
+            .then(result => {
+                document.getElementById("docx-viewer").innerHTML = result.value;
+            })
+            .catch(error => {
+                document.getElementById("docx-viewer").innerHTML = "<p>Ошибка загрузки документа. <a href='@fileUrl'>Скачать DOCX</a></p>";
+                console.error("Ошибка рендеринга DOCX:", error);
+            });
+    </script>
+}
+else
+{
+    <p>Неподдерживаемый формат документа.</p>
+}
+
+<a class="btn btn-success" href="/files/get/@Model.Document.Id" download>Скачать документ</a>
+<a class="btn btn-primary" href="/User/Documents">Вернуться к списку документов</a>

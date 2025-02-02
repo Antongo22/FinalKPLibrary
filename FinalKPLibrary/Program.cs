@@ -178,4 +178,9 @@ app.UseSession(); // ѕодключение сессий (если они используютс€)
 
 app.MapRazorPages();
 app.UseCors("AllowAll");
+app.MapControllers();
 app.Run();
+
+
+// TODO : поис документов
+// TODO : разные €зыки

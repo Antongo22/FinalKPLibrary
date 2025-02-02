@@ -14,6 +14,7 @@
             <th>Topic</th>
             <th>Upload Date</th>
             <th>Visibility Areas</th>
+            <th>Actions</th>
         </tr>
     </thead>
     <tbody>
@@ -26,6 +27,9 @@
                 <td>@doc.UploadDate.ToString("yyyy-MM-dd HH:mm")</td>
                 <td>
                     @string.Join(", ", doc.DocVisibilityAreas.Select(dva => dva.VisibilityArea.Name))
+                </td>
+                <td>
+                    <a asp-page="/User/ViewDocument" asp-route-id="@doc.Id">View</a>
                 </td>
             </tr>
         }

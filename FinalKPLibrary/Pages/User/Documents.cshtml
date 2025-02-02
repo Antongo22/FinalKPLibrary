@@ -6,7 +6,15 @@
 
 <h2>My Documents</h2>
 
-<table class="table">
+<form method="get" class="position-relative">
+    <div class="input-group">
+        <input type="text" id="searchInput" name="searchQuery" placeholder="Search..." value="@Model.SearchQuery" class="form-control" />
+        <button type="submit" class="btn btn-primary">Search</button>
+        <button type="button" id="clearSearch" class="btn btn-secondary" style="display: none;">❌</button>
+    </div>
+</form>
+
+<table class="table mt-3">
     <thead>
         <tr>
             <th>Name</th>
@@ -35,3 +43,23 @@
         }
     </tbody>
 </table>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        let searchInput = document.getElementById("searchInput");
+        let clearSearch = document.getElementById("clearSearch");
+
+        function toggleClearButton() {
+            clearSearch.style.display = searchInput.value.length > 0 ? "inline-block" : "none";
+        }
+
+        searchInput.addEventListener("input", toggleClearButton);
+        toggleClearButton();
+
+        clearSearch.addEventListener("click", function () {
+            searchInput.value = "";
+            clearSearch.style.display = "none";
+            document.querySelector("form").submit();
+        });
+    });
+</script>

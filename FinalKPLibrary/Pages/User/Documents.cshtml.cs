@@ -1,42 +1,41 @@
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
-using FinalKPLibrary.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Identity;
+using FinalKPLibrary.Models;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
 
 public class DocumentsModel : PageModel
 {
     private readonly AppDbContext _context;
-    private readonly UserManager<User> _userManager;
 
-    public DocumentsModel(AppDbContext context, UserManager<User> userManager)
+    public DocumentsModel(AppDbContext context)
     {
         _context = context;
-        _userManager = userManager;
     }
 
-    public List<Doc> Documents { get; set; }
+    public List<Doc> Documents { get; set; } = new List<Doc>();
+    [BindProperty(SupportsGet = true)]
+    public string? SearchQuery { get; set; }
 
-    public async Task OnGetAsync()
+    public async Task<IActionResult> OnGetAsync()
     {
-        var user = await _userManager.GetUserAsync(User);
-        if (user == null)
+        var query = _context.Set<Doc>().Include(d => d.DocVisibilityAreas).ThenInclude(dva => dva.VisibilityArea).AsQueryable();
+
+        if (!string.IsNullOrWhiteSpace(SearchQuery))
         {
-            return;
+            query = query.Where(d =>
+                d.Name.Contains(SearchQuery) ||
+                d.Description.Contains(SearchQuery) ||
+                d.Topic.Contains(SearchQuery) ||
+                d.UploadDate.ToString().Contains(SearchQuery) ||
+                d.DocVisibilityAreas.Any(dva => dva.VisibilityArea.Name.Contains(SearchQuery))
+            );
         }
 
-        var userVisibilityAreas = await _context.UserVisibilityAreas
-            .Where(uva => uva.UserId == user.Id)
-            .Select(uva => uva.VisibilityAreaId)
-            .ToListAsync();
-
-        Documents = await _context.Docs
-            .Include(d => d.DocVisibilityAreas)
-            .ThenInclude(dva => dva.VisibilityArea)
-            .Where(d => d.DocVisibilityAreas.Any(dva => userVisibilityAreas.Contains(dva.VisibilityAreaId)))
-            .ToListAsync();
+        Documents = await query.ToListAsync();
+        return Page();
     }
 }

@@ -164,30 +164,6 @@ else
     app.UseHsts();
 }
 
-app.Use(async (context, next) =>
-{
-    var userManager = context.RequestServices.GetRequiredService<UserManager<User>>();
-    var signInManager = context.RequestServices.GetRequiredService<SignInManager<User>>();
-
-    var user = context.User;
-    if (user.Identity?.IsAuthenticated == true)
-    {
-        var userId = userManager.GetUserId(user);
-        if (userId != null)
-        {
-            var existingUser = await userManager.FindByIdAsync(userId);
-            if (existingUser == null)
-            {
-                await signInManager.SignOutAsync(); // Разлогинивание
-                context.Response.Redirect("/Account/Login"); // Перенаправление на страницу входа
-                return;
-            }
-        }
-    }
-
-    await next();
-});
-
 
 
 app.UseHttpsRedirection();

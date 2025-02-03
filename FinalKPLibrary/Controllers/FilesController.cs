@@ -19,33 +19,28 @@ namespace FinalKPLibrary.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> GetFile(int id)
         {
-            // Получаем документ из БД по id
             var doc = await _context.Set<Doc>().FindAsync(id);
             if (doc == null)
             {
-                return NotFound("Документ не найден.");
+                return NotFound(Resources.Resource.FileNotFound);
             }
 
             string relativePath = doc.FilePath;
-            // Если в пути содержится "wwwroot", то берем все, что после него
             var marker = "wwwroot";
             var index = doc.FilePath.IndexOf(marker, StringComparison.OrdinalIgnoreCase);
             if (index != -1)
             {
                 relativePath = doc.FilePath.Substring(index + marker.Length);
             }
-            // Убираем начальные разделители
             relativePath = relativePath.TrimStart(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar);
 
-            // Формируем абсолютный путь к файлу
             var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", relativePath);
 
             if (!System.IO.File.Exists(filePath))
             {
-                return NotFound("Файл не найден на сервере.");
+                return NotFound(Resources.Resource.FileNotFound);
             }
 
-            // Определяем MIME-тип файла
             string contentType = "application/octet-stream";
             if (filePath.EndsWith(".pdf", StringComparison.OrdinalIgnoreCase))
             {

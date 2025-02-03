@@ -4,8 +4,12 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using FinalKPLibrary.Models;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Localization;
+using System.Globalization;
+using Microsoft.Extensions.Options;
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddControllersWithViews();
 
 builder.Logging.ClearProviders();
 builder.Logging.AddConsole();
@@ -57,6 +61,9 @@ builder.Services.AddIdentity<User, IdentityRole<int>>(options =>
 .AddEntityFrameworkStores<AppDbContext>()
 .AddDefaultTokenProviders();
 
+builder.Services.AddControllersWithViews()
+    .AddViewLocalization()
+    .AddDataAnnotationsLocalization();
 
 builder.Services.ConfigureApplicationCookie(options =>
 {
@@ -106,8 +113,17 @@ builder.Services.AddCors(options =>
     });
 });
 
+builder.Services.AddLocalization(options => options.ResourcesPath = "Resources");
+
+
+
+
+
 
 var app = builder.Build();
+
+
+
 
 using (var scope = app.Services.CreateScope())
 {
@@ -176,9 +192,32 @@ app.UseAuthorization();  // Затем авторизация
 
 app.UseSession(); // Подключение сессий (если они используются)
 
+var localizationOptions = app.Services.GetRequiredService<IOptions<RequestLocalizationOptions>>().Value;
+app.UseRequestLocalization(localizationOptions);
+
+app.Use(async (context, next) =>
+{
+    string cookie = string.Empty;
+    if (context.Request.Cookies.TryGetValue("Language", out cookie))
+    {
+        System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo(cookie);
+        System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo(cookie);
+    }
+    else
+    {
+        System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("en");
+        System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("en");
+    }
+    await next.Invoke();
+});
+
+
+
 app.MapRazorPages();
 app.UseCors("AllowAll");
 app.MapControllers();
+
+
 app.Run();
 
 

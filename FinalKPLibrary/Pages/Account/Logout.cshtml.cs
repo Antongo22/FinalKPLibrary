@@ -16,13 +16,10 @@ namespace FinalKPLibrary.Pages.Account
 
         public async Task<IActionResult> OnPostAsync()
         {
-            // Выход из системы
             await _signInManager.SignOutAsync();
 
-            // Удаление кук аутентификации
             await HttpContext.SignOutAsync(IdentityConstants.ApplicationScheme);
 
-            // Перенаправление на главную страницу
             return RedirectToPage("/Index");
         }
     }

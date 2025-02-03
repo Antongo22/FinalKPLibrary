@@ -1,24 +1,24 @@
 ﻿@page "{id}"
 @model DocumentDetailsModel
 @{
-    ViewData["Title"] = "Document Details";
+    ViewData["Title"] = @Resources.Resource.Document_Details;
 }
-<h2>Document Details</h2>
+<h2>@Resources.Resource.Document_Details</h2>
 <div>
     <h3>@Model.Doc.Name</h3>
-    <p><strong>Description:</strong> @Model.Doc.Description</p>
-    <p><strong>Topic:</strong> @Model.Doc.Topic</p>
-    <p><strong>Upload Date:</strong> @Model.Doc.UploadDate.ToString("yyyy-MM-dd HH:mm")</p>
-    <p><strong>File Path:</strong> @Model.Doc.FilePath</p>
+    <p><strong>@Resources.Resource.Description:</strong> @Model.Doc.Description</p>
+    <p><strong>@Resources.Resource.Topic:</strong> @Model.Doc.Topic</p>
+    <p><strong>@Resources.Resource.Upload_Date:</strong> @Model.Doc.UploadDate.ToString("yyyy-MM-dd HH:mm")</p>
+    <p><strong>@Resources.Resource.File_Path:</strong> @Model.Doc.FilePath</p>
 </div>
-<h3>Visibility Areas</h3>
+<h3>@Resources.Resource.VisibilityAreas</h3>
 <ul>
     @foreach (var area in Model.Doc.DocVisibilityAreas.Select(dva => dva.VisibilityArea))
     {
         <li>
             @area.Name
             <form method="post" asp-page-handler="RemoveVisibilityArea" asp-route-docId="@Model.Doc.Id" asp-route-areaId="@area.Id" style="display:inline;">
-                <button type="submit" class="btn btn-danger btn-sm">Remove</button>
+                <button type="submit" class="btn btn-danger btn-sm">@Resources.Resource.Remove</button>
             </form>
         </li>
     }
@@ -26,11 +26,11 @@
 
 @if (Model.AvailableVisibilityAreas.Any())
 {
-    <h3>Add Visibility Area</h3>
+    <h3>@Resources.Resource.Add_Visibility_Area</h3>
     <form method="post" asp-page-handler="AddVisibilityArea">
         <input type="hidden" name="docId" value="@Model.Doc.Id" />
         <div class="form-group">
-            <label for="areaId">Select Visibility Area:</label>
+            <label for="areaId">@Resources.Resource.Select_Visibility_Area:</label>
             <select class="form-control" id="areaId" name="areaId">
                 @foreach (var area in Model.AvailableVisibilityAreas)
                 {
@@ -38,18 +38,18 @@
                 }
             </select>
         </div>
-        <button type="submit" class="btn btn-primary">Add</button>
+        <button type="submit" class="btn btn-primary">@Resources.Resource.Add</button>
     </form>
 }
 else
 {
-    <h3>Add Visibility Area</h3>
+    <h3>@Resources.Resource.Add_Visibility_Area </h3>
     <div class="alert alert-warning" role="alert">
-        No available visibility areas to add.
+        @Resources.Resource.No_available_visibility_areas_to_add.
     </div>
 }
 
 <form method="post" asp-page-handler="Delete" asp-route-id="@Model.Doc.Id">
-    <button type="submit" class="btn btn-danger">Delete Document</button>
+    <button type="submit" class="btn btn-danger">@Resources.Resource.Delete_Document</button>
 </form>
-<a asp-page="/Admin/Documents" class="btn btn-secondary">Back to List</a>
+<a asp-page="/Admin/Documents" class="btn btn-secondary">@Resources.Resource.Back_to_List</a>

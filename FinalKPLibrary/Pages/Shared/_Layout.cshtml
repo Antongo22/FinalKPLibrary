@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.Extensions.Localization
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -13,41 +15,59 @@
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container">
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                aria-expanded="false" aria-label="Toggle navigation">
+                        aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
+                            <a class="nav-link text-dark" asp-area="" asp-page="/Index">@Resources.Resource.Home</a>
                         </li>
                         @if (User.Identity.IsAuthenticated)
                         {
                             @if (User.IsInRole("admin"))
                             {
                                 <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-page="/Admin/Users">Users</a>
+                                    <a class="nav-link text-dark" asp-area="" asp-page="/Admin/Users">@Resources.Resource.Users</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-page="/Admin/Documents">Documents</a>
+                                    <a class="nav-link text-dark" asp-area="" asp-page="/Admin/Documents">@Resources.Resource.Documents</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-page="/Admin/VisibilityAreas">VisibilityAreas</a>
+                                    <a class="nav-link text-dark" asp-area="" asp-page="/Admin/VisibilityAreas">@Resources.Resource.VisibilityAreas</a>
                                 </li>
                             }
                             else
                             {
                                 <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-page="/User/Documents">Documents</a>
+                                    <a class="nav-link text-dark" asp-area="" asp-page="/User/Documents">@Resources.Resource.Documents</a>
                                 </li>
                             }
-                        }                       
+                        }
                         else
                         {
                             <li class="nav-item">
-                                <a class="nav-link text-dark" href="/Account/Login">Login</a>
+                                <a class="nav-link text-dark" href="/Account/Login">@Resources.Resource.Login</a>
                             </li>
                         }
+                    </ul>
+                    <ul class="navbar-nav text-end">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link text-dark dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                @if (Thread.CurrentThread.CurrentCulture.ToString() == "en")
+                                {
+                                    <span>English</span>
+                                }
+                                else
+                                {
+                                    <span>Русский</span>
+                                }
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end">
+                                <li><a class="dropdown-item" asp-controller="Home" asp-action="ChangeLanguage" asp-route-lang="en">English</a></li>
+                                <li><a class="dropdown-item" asp-controller="Home" asp-action="ChangeLanguage" asp-route-lang="ru">Русский</a></li>
+                            </ul>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -61,7 +81,7 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2025 - FinalKPLibrary - <a asp-area="" asp-page="/Privacy">Privacy</a>
+            &copy; 2025 - FinalKPLibrary - <a asp-area="" asp-page="/Privacy">@Resources.Resource.Privacy</a>
         </div>
     </footer>
 

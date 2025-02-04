@@ -30,7 +30,6 @@ public class UserDetailsModel : PageModel
             return RedirectToPage("/Account/AccessDenied");
         }
 
-        // Загружаем пользователя с его зонами видимости
         user = await _context.Users
             .Include(u => u.UserVisibilityAreas)
             .ThenInclude(uva => uva.VisibilityArea)
@@ -41,7 +40,6 @@ public class UserDetailsModel : PageModel
             return NotFound();
         }
 
-        // Загружаем все доступные зоны видимости
         AvailableVisibilityAreas = await _context.VisibilityAreas
             .Where(va => !user.UserVisibilityAreas.Select(uva => uva.VisibilityAreaId).Contains(va.Id))
             .ToListAsync();
@@ -56,13 +54,11 @@ public class UserDetailsModel : PageModel
             return RedirectToPage("/Account/AccessDenied");
         }
 
-        // Проверяем, что зона видимости ещё не присвоена пользователю
         var existingLink = await _context.UserVisibilityAreas
             .FirstOrDefaultAsync(uva => uva.UserId == userId && uva.VisibilityAreaId == areaId);
 
         if (existingLink == null)
         {
-            // Создаем связь между пользователем и зоной видимости
             var userVisibilityArea = new UserVisibilityArea
             {
                 UserId = userId,
@@ -83,13 +79,11 @@ public class UserDetailsModel : PageModel
             return RedirectToPage("/Account/AccessDenied");
         }
 
-        // Находим связь между пользователем и зоной видимости
         var userVisibilityArea = await _context.UserVisibilityAreas
             .FirstOrDefaultAsync(uva => uva.UserId == userId && uva.VisibilityAreaId == areaId);
 
         if (userVisibilityArea != null)
         {
-            // Удаляем связь
             _context.UserVisibilityAreas.Remove(userVisibilityArea);
             await _context.SaveChangesAsync();
         }

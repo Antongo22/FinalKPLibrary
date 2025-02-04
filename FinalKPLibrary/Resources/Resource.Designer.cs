@@ -70,6 +70,15 @@ namespace FinalKPLibrary.Resources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Actions.
+        /// </summary>
+        public static string Actions {
+            get {
+                return ResourceManager.GetString("Actions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Add.
         /// </summary>
         public static string Add {
@@ -106,6 +115,24 @@ namespace FinalKPLibrary.Resources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Choose a file.
+        /// </summary>
+        public static string ChooseFile {
+            get {
+                return ResourceManager.GetString("ChooseFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Delete.
+        /// </summary>
+        public static string Delete {
+            get {
+                return ResourceManager.GetString("Delete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Delete Document.
         /// </summary>
         public static string Delete_Document {
@@ -133,11 +160,38 @@ namespace FinalKPLibrary.Resources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Document List.
+        /// </summary>
+        public static string DocumentList {
+            get {
+                return ResourceManager.GetString("DocumentList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Document Name.
+        /// </summary>
+        public static string DocumentName {
+            get {
+                return ResourceManager.GetString("DocumentName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Documents.
         /// </summary>
         public static string Documents {
             get {
                 return ResourceManager.GetString("Documents", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Documents Management.
+        /// </summary>
+        public static string DocumentsManagement {
+            get {
+                return ResourceManager.GetString("DocumentsManagement", resourceCulture);
             }
         }
         
@@ -187,6 +241,15 @@ namespace FinalKPLibrary.Resources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Name.
+        /// </summary>
+        public static string Name {
+            get {
+                return ResourceManager.GetString("Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на No available visibility areas to add.
         /// </summary>
         public static string No_available_visibility_areas_to_add {
@@ -232,6 +295,15 @@ namespace FinalKPLibrary.Resources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Search.
+        /// </summary>
+        public static string Search {
+            get {
+                return ResourceManager.GetString("Search", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Select Visibility Area.
         /// </summary>
         public static string Select_Visibility_Area {
@@ -250,11 +322,47 @@ namespace FinalKPLibrary.Resources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Type.
+        /// </summary>
+        public static string Type {
+            get {
+                return ResourceManager.GetString("Type", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Upload.
+        /// </summary>
+        public static string Upload {
+            get {
+                return ResourceManager.GetString("Upload", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Upload Date.
         /// </summary>
         public static string Upload_Date {
             get {
                 return ResourceManager.GetString("Upload_Date", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Upload New Document.
+        /// </summary>
+        public static string Upload_New_Document {
+            get {
+                return ResourceManager.GetString("Upload_New_Document", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на User Details.
+        /// </summary>
+        public static string User_Details {
+            get {
+                return ResourceManager.GetString("User_Details", resourceCulture);
             }
         }
         
@@ -273,6 +381,15 @@ namespace FinalKPLibrary.Resources {
         public static string Users {
             get {
                 return ResourceManager.GetString("Users", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Visibility Area.
+        /// </summary>
+        public static string Visibility_Area {
+            get {
+                return ResourceManager.GetString("Visibility_Area", resourceCulture);
             }
         }
         

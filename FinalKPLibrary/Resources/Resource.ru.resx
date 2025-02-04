@@ -120,6 +120,9 @@
   <data name="Access_Denied" xml:space="preserve">
     <value>Доступ запрещен</value>
   </data>
+  <data name="Actions" xml:space="preserve">
+    <value>Действия</value>
+  </data>
   <data name="Add" xml:space="preserve">
     <value>Добавить</value>
   </data>
@@ -132,14 +135,29 @@
   <data name="BeenLogout" xml:space="preserve">
     <value>You have been logged out.</value>
   </data>
+  <data name="ChooseFile" xml:space="preserve">
+    <value>Выберите файл</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Удалить</value>
+  </data>
   <data name="Delete_Document" xml:space="preserve">
     <value>Удалить документ</value>
   </data>
   <data name="Description" xml:space="preserve">
     <value>Описание</value>
   </data>
+  <data name="DocumentList" xml:space="preserve">
+    <value>Список Документов</value>
+  </data>
+  <data name="DocumentName" xml:space="preserve">
+    <value>Имя Документа</value>
+  </data>
   <data name="Documents" xml:space="preserve">
     <value>Документы</value>
+  </data>
+  <data name="DocumentsManagement" xml:space="preserve">
+    <value>Управление Документами</value>
   </data>
   <data name="Document_Details" xml:space="preserve">
     <value>Детали Документа</value>
@@ -159,11 +177,14 @@
   <data name="Logout" xml:space="preserve">
     <value>Выход</value>
   </data>
+  <data name="Name" xml:space="preserve">
+    <value>Имя</value>
+  </data>
   <data name="NotPermission" xml:space="preserve">
     <value>У вас нет разрешения на доступ к этой странице</value>
   </data>
   <data name="No_available_visibility_areas_to_add" xml:space="preserve">
-    <value>No available visibility areas to add</value>
+    <value>Нет доступных областей видимости для добавления</value>
   </data>
   <data name="Password" xml:space="preserve">
     <value>Пароль</value>
@@ -174,20 +195,35 @@
   <data name="Remove" xml:space="preserve">
     <value>Удалить</value>
   </data>
+  <data name="Search" xml:space="preserve">
+    <value>Поиск</value>
+  </data>
   <data name="Select_Visibility_Area" xml:space="preserve">
     <value>Выбрать область видимости</value>
   </data>
   <data name="Topic" xml:space="preserve">
     <value>Тема</value>
   </data>
+  <data name="Type" xml:space="preserve">
+    <value>Тип</value>
+  </data>
+  <data name="Upload" xml:space="preserve">
+    <value>Выложить</value>
+  </data>
   <data name="Upload_Date" xml:space="preserve">
     <value>Дата публикации</value>
+  </data>
+  <data name="Upload_New_Document" xml:space="preserve">
+    <value>Выложить новый документ</value>
   </data>
   <data name="Username" xml:space="preserve">
     <value>Имя пользователя</value>
   </data>
   <data name="Users" xml:space="preserve">
     <value>Пользователи</value>
+  </data>
+  <data name="User_Details" xml:space="preserve">
+    <value>Данные пользователя</value>
   </data>
   <data name="VisibilityAreas" xml:space="preserve">
     <value>Области видимости</value>

@@ -103,7 +103,7 @@ namespace FinalKPLibrary.Pages.Admin
 
             if (_context.Docs.Any(d => d.Name == name))
             {
-                ModelState.AddModelError(string.Empty, "ƒокумент с таким именем уже существует.");
+                ModelState.AddModelError(string.Empty, "A document with that name already exists.");
                 return Page();
             }
 

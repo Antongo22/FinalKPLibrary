@@ -1,21 +1,21 @@
 ﻿@page "{id}"
 @model UserDetailsModel
 @{
-    ViewData["Title"] = "User Details";
+    ViewData["Title"] = @Resources.Resource.User_Details;
 }
-<h2>User Details</h2>
+<h2>@Resources.Resource.User_Details</h2>
 <div>
     <h3>@Model.user.UserName</h3>
-    <p><strong>Type:</strong> @Model.user.Type</p>
+    <p><strong>@Resources.Resource.Type:</strong> @Model.user.Type</p>
 </div>
-<h3>Visibility Areas</h3>
+<h3>@Resources.Resource.VisibilityAreas</h3>
 <ul>
     @foreach (var area in Model.user.UserVisibilityAreas.Select(uva => uva.VisibilityArea))
     {
         <li>
             @area.Name
             <form method="post" asp-page-handler="RemoveVisibilityArea" asp-route-userId="@Model.user.Id" asp-route-areaId="@area.Id" style="display:inline;">
-                <button type="submit" class="btn btn-danger btn-sm">Remove</button>
+                <button type="submit" class="btn btn-danger btn-sm">@Resources.Resource.Remove</button>
             </form>
         </li>
     }
@@ -23,11 +23,11 @@
 
 @if (Model.AvailableVisibilityAreas.Any())
 {
-    <h3>Add Visibility Area</h3>
+    <h3>@Resources.Resource.Add_Visibility_Area</h3>
     <form method="post" asp-page-handler="AddVisibilityArea">
         <input type="hidden" name="userId" value="@Model.user.Id" />
         <div class="form-group">
-            <label for="areaId">Select Visibility Area:</label>
+            <label for="areaId">@Resources.Resource.Select_Visibility_Area:</label>
             <select class="form-control" id="areaId" name="areaId">
                 @foreach (var area in Model.AvailableVisibilityAreas)
                 {
@@ -35,15 +35,15 @@
                 }
             </select>
         </div>
-        <button type="submit" class="btn btn-primary">Add</button>
+        <button type="submit" class="btn btn-primary">@Resources.Resource.Add</button>
     </form>
 }
 else
 {
-    <h3>Add Visibility Area</h3>
+    <h3>@Resources.Resource.Add_Visibility_Area</h3>
     <div class="alert alert-warning" role="alert">
-        No available visibility areas to add.
+        @Resources.Resource.No_available_visibility_areas_to_add.
     </div>
 }
 
-<a asp-page="/Admin/Users" class="btn btn-secondary">Back to List</a>
+<a asp-page="/Admin/Users" class="btn btn-secondary">@Resources.Resource.Back_to_List</a>

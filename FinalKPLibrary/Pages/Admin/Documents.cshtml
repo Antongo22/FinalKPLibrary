@@ -1,38 +1,38 @@
 ﻿@page
 @model DocumentsModel
 @{
-    ViewData["Title"] = "Documents Management";
+    ViewData["Title"] = @Resources.Resource.DocumentsManagement;
 }
 
-<h2>Documents Management</h2>
+<h2>@Resources.Resource.DocumentsManagement</h2>
 
-<h3>Upload New Document</h3>
+<h3>@Resources.Resource.Upload_New_Document</h3>
 <form method="post" enctype="multipart/form-data" asp-page-handler="Upload">
     <div class="form-group">
-        <label for="file">Choose a file (.docx or .pdf):</label>
+        <label for="file">@Resources.Resource.ChooseFile (.docx or .pdf):</label>
         <input type="file" class="form-control" id="file" name="file" accept=".docx,.pdf" required />
     </div>
     <div class="form-group">
-        <label for="name">Document Name:</label>
+        <label for="name">@Resources.Resource.DocumentName:</label>
         <input type="text" class="form-control" id="name" name="name" required />
     </div>
     <div class="form-group">
-        <label for="description">Description:</label>
+        <label for="description">@Resources.Resource.Description:</label>
         <input type="text" class="form-control" id="description" name="description" required />
     </div>
     <div class="form-group">
-        <label for="topic">Topic:</label>
+        <label for="topic">@Resources.Resource.Topic:</label>
         <input type="text" class="form-control" id="topic" name="topic" required />
     </div>
-    <button type="submit" class="btn btn-primary">Upload</button>
+    <button type="submit" class="btn btn-primary">@Resources.Resource.Upload</button>
 </form>
 
-<h3>Document List</h3>
+<h3>@Resources.Resource.DocumentList</h3>
 
 <form method="get" class="position-relative">
     <div class="input-group">
-        <input type="text" id="searchInput" name="searchQuery" placeholder="Search..." value="@Model.SearchQuery" class="form-control" />
-        <button type="submit" class="btn btn-primary">Search</button>
+        <input type="text" id="searchInput" name="searchQuery" placeholder="@Resources.Resource.Search..." value="@Model.SearchQuery" class="form-control" />
+        <button type="submit" class="btn btn-primary">@Resources.Resource.Search</button>
         <button type="button" id="clearSearch" class="btn btn-secondary" style="display: none;">❌</button>
     </div>
 </form>
@@ -40,13 +40,13 @@
 <table class="table">
     <thead>
         <tr>
-            <th><a asp-page="./Documents" asp-route-sortBy="Name" asp-route-sortOrder="@Model.NextSortOrder" asp-route-searchQuery="@Model.SearchQuery">Name</a></th>
-            <th><a asp-page="./Documents" asp-route-sortBy="Description" asp-route-sortOrder="@Model.NextSortOrder" asp-route-searchQuery="@Model.SearchQuery">Description</a></th>
-            <th><a asp-page="./Documents" asp-route-sortBy="Topic" asp-route-sortOrder="@Model.NextSortOrder" asp-route-searchQuery="@Model.SearchQuery">Topic</a></th>
-            <th><a asp-page="./Documents" asp-route-sortBy="UploadDate" asp-route-sortOrder="@Model.NextSortOrder" asp-route-searchQuery="@Model.SearchQuery">Upload Date</a></th>
-            <th>File Path</th>
-            <th>Visibility Areas</th>
-            <th>Actions</th>
+            <th><a asp-page="./Documents" asp-route-sortBy="Name" asp-route-sortOrder="@Model.NextSortOrder" asp-route-searchQuery="@Model.SearchQuery">@Resources.Resource.Name</a></th>
+            <th><a asp-page="./Documents" asp-route-sortBy="Description" asp-route-sortOrder="@Model.NextSortOrder" asp-route-searchQuery="@Model.SearchQuery">@Resources.Resource.Description</a></th>
+            <th><a asp-page="./Documents" asp-route-sortBy="Topic" asp-route-sortOrder="@Model.NextSortOrder" asp-route-searchQuery="@Model.SearchQuery">@Resources.Resource.Topic</a></th>
+            <th><a asp-page="./Documents" asp-route-sortBy="UploadDate" asp-route-sortOrder="@Model.NextSortOrder" asp-route-searchQuery="@Model.SearchQuery">@Resources.Resource.Upload_Date</a></th>
+            <th>@Resources.Resource.File_Path</th>
+            <th>@Resources.Resource.VisibilityAreas</th>
+            <th>@Resources.Resource.Actions</th>
         </tr>
     </thead>
 
@@ -71,7 +71,7 @@
                 </td>
                 <td>
                     <form method="post" asp-page-handler="Delete" asp-route-id="@doc.Id">
-                        <button type="submit" class="btn btn-danger">Delete</button>
+                        <button type="submit" class="btn btn-danger">@Resources.Resource.Delete</button>
                     </form>
                 </td>
             </tr>

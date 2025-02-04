@@ -192,6 +192,9 @@
   <data name="Go_back_to_the_list_of_documents" xml:space="preserve">
     <value>Вернуться к списку документов</value>
   </data>
+  <data name="Hello" xml:space="preserve">
+    <value>Привет</value>
+  </data>
   <data name="Home" xml:space="preserve">
     <value>Главная</value>
   </data>

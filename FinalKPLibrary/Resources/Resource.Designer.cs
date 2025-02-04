@@ -286,6 +286,15 @@ namespace FinalKPLibrary.Resources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Hello.
+        /// </summary>
+        public static string Hello {
+            get {
+                return ResourceManager.GetString("Hello", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Home.
         /// </summary>
         public static string Home {

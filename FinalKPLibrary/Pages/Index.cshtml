@@ -9,13 +9,13 @@
 
     @if (User.Identity.IsAuthenticated)
     {
-        <p>Hello, @User.Identity.Name!</p>
+        <p>@Resources.Resource.Hello, @User.Identity.Name!</p>
         <form method="post" asp-page="/Account/Logout">
             <button type="submit" class="btn btn-danger">@Resources.Resource.Logout</button>
         </form>
     }
     else
     {
-        <p>@Resources.Resource.Please <a href="/Account/Login">@Resources.Resource.LoginIn.ToLower()</a>@Resources.Resource.To_access_more_features.</p>
+        <p>@Resources.Resource.Please <a href="/Account/Login">@Resources.Resource.LoginIn.ToLower() </a>@Resources.Resource.To_access_more_features.</p>
     }
 </div>

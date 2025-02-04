@@ -192,6 +192,9 @@
   <data name="Go_back_to_the_list_of_documents" xml:space="preserve">
     <value>Go back to the list of documents</value>
   </data>
+  <data name="Hello" xml:space="preserve">
+    <value>Hello</value>
+  </data>
   <data name="Home" xml:space="preserve">
     <value>Home</value>
   </data>

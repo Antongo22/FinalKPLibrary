@@ -1,25 +1,25 @@
 ﻿@page "{id:int}"
 @model FinalKPLibrary.Pages.User.ViewDocumentModel
 @{
-    ViewData["Title"] = "View Document";
+    ViewData["Title"] = @Resources.Resource.View_Document;
     var fileName = System.IO.Path.GetFileName(Model.Document.FilePath);
     var fileUrl = Url.Content($"/uploads/{fileName}");
 }
 
 <h2>@Model.Document.Name</h2>
 <p>@Model.Document.Description</p>
-<p>Uploaded: @Model.Document.UploadDate.ToString("yyyy-MM-dd HH:mm")</p>
+<p>@Resources.Resource.Uploaded: @Model.Document.UploadDate.ToString("yyyy-MM-dd HH:mm")</p>
 
 @if (Model.Document.FilePath.EndsWith(".pdf", StringComparison.OrdinalIgnoreCase))
 {
-    <object data="@fileUrl" type="application/pdf" width="100%" height="600">
-        <p>Ваш браузер не поддерживает просмотр PDF. <a href="@fileUrl">Скачать PDF</a>.</p>
+    <object data="@fileUrl" type="application/pdf" width="100%" height="800">
+        <p>@Resources.Resource.BrowserNotSupportPDFViewing<a href="@fileUrl">@Resources.Resource.DownloadPDF</a>.</p>
     </object>
 }
 else if (Model.Document.FilePath.EndsWith(".docx", StringComparison.OrdinalIgnoreCase))
 {
     <div id="docx-viewer">
-        <p>Загрузка документа...</p>
+        <p>@Resources.Resource.UploadingDocument...</p>
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.4.2/mammoth.browser.min.js"></script>
@@ -33,15 +33,15 @@ else if (Model.Document.FilePath.EndsWith(".docx", StringComparison.OrdinalIgnor
                 document.getElementById("docx-viewer").innerHTML = result.value;
             })
             .catch(error => {
-                document.getElementById("docx-viewer").innerHTML = "<p>Ошибка загрузки документа. <a href='@fileUrl'>Скачать DOCX</a></p>";
-                console.error("Ошибка рендеринга DOCX:", error);
+                document.getElementById("docx-viewer").innerHTML = "<p>@Resources.Resource.Error_loading_the_document.<a href='@fileUrl'>Скачать DOCX</a></p>";
+                console.error("DOCX rendering error:", error);
             });
     </script>
 }
 else
 {
-    <p>Неподдерживаемый формат документа.</p>
+    <p>@Resources.Resource.Unsupported_document_format</p>
 }
 
-<a class="btn btn-success" href="/files/get/@Model.Document.Id" download>Скачать документ</a>
-<a class="btn btn-primary" href="/User/Documents">Вернуться к списку документов</a>
+<a class="btn btn-success" href="/files/get/@Model.Document.Id" download>@Resources.Resource.Download_the_document</a>
+<a class="btn btn-primary" href="/User/Documents">@Resources.Resource.Go_back_to_the_list_of_documents</a>

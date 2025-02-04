@@ -1,31 +1,31 @@
 ﻿@page
 @model UsersModel
 @{
-    ViewData["Title"] = "Users Management";
+    ViewData["Title"] = @Resources.Resource.Users_Management;
 }
 
-<h2>Users Management</h2>
+<h2>@Resources.Resource.Users_Management</h2>
 
-<h3>Add New User</h3>
+<h3>@Resources.Resource.Add_New_User</h3>
 <form method="post" asp-page-handler="AddUser">
     <div class="form-group">
-        <label for="username">Username</label>
+        <label for="username">@Resources.Resource.Username</label>
         <input type="text" class="form-control" id="username" name="username" required />
     </div>
     <div class="form-group">
-        <label for="password">Password</label>
+        <label for="password">@Resources.Resource.Password</label>
         <input type="password" class="form-control" id="password" name="password" required />
     </div>
-    <button type="submit" class="btn btn-primary">Add User</button>
+    <button type="submit" class="btn btn-primary">@Resources.Resource.Add_User</button>
 </form>
 
 <h3>User List</h3>
 <table class="table">
     <thead>
         <tr>
-            <th>Username</th>
-            <th>Visibility Area</th>
-            <th>Actions</th>
+            <th>@Resources.Resource.Username</th>
+            <th>@Resources.Resource.Visibility_Area</th>
+            <th>@Resources.Resource.Actions</th>
         </tr>
     </thead>
     <tbody>

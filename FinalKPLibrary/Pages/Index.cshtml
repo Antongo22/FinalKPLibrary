@@ -1,21 +1,21 @@
 ﻿@page
 @model IndexModel
 @{
-    ViewData["Title"] = "Home";
+    ViewData["Title"] = @Resources.Resource.Home;
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
+    <h1 class="display-4">@Resources.Resource.Welcome</h1>
 
     @if (User.Identity.IsAuthenticated)
     {
         <p>Hello, @User.Identity.Name!</p>
         <form method="post" asp-page="/Account/Logout">
-            <button type="submit" class="btn btn-danger">Logout</button>
+            <button type="submit" class="btn btn-danger">@Resources.Resource.Logout</button>
         </form>
     }
     else
     {
-        <p>Please <a href="/Account/Login">login</a> to access more features.</p>
+        <p>@Resources.Resource.Please <a href="/Account/Login">@Resources.Resource.LoginIn.ToLower()</a>@Resources.Resource.To_access_more_features.</p>
     }
 </div>

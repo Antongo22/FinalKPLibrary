@@ -1,26 +1,26 @@
 ﻿@page
 @model VisibilityAreasModel
 @{
-    ViewData["Title"] = "Visibility Areas Management";
+    ViewData["Title"] = @Resources.Resource.Visibility_Areas_Management;
 }
 
-<h2>Visibility Areas Management</h2>
+<h2>@Resources.Resource.Visibility_Areas_Management</h2>
 
-<h3>Add New Visibility Area</h3>
+<h3>@Resources.Resource.Add_New_Visibility_Area</h3>
 <form method="post" asp-page-handler="Add">
     <div class="form-group">
-        <label for="name">Visibility Area Name:</label>
+        <label for="name">@Resources.Resource.Visibility_Area_Name:</label>
         <input type="text" class="form-control" id="name" name="name" required />
     </div>
-    <button type="submit" class="btn btn-primary">Add</button>
+    <button type="submit" class="btn btn-primary">@Resources.Resource.Add</button>
 </form>
 
-<h3>Visibility Areas List</h3>
+<h3>@Resources.Resource.Visibility_Areas_List</h3>
 <table class="table">
     <thead>
         <tr>
-            <th>Name</th>
-            <th>Actions</th>
+            <th>@Resources.Resource.Name</th>
+            <th>@Resources.Resource.Actions</th>
         </tr>
     </thead>
     <tbody>
@@ -30,7 +30,7 @@
                 <td>@area.Name</td>
                 <td>
                     <form method="post" asp-page-handler="Delete" asp-route-id="@area.Id">
-                        <button type="submit" class="btn btn-danger">Delete</button>
+                        <button type="submit" class="btn btn-danger">@Resources.Resource.Delete</button>
                     </form>
                 </td>
             </tr>

@@ -88,6 +88,33 @@ namespace FinalKPLibrary.Resources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Add New User.
+        /// </summary>
+        public static string Add_New_User {
+            get {
+                return ResourceManager.GetString("Add_New_User", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Add New Visibility Area.
+        /// </summary>
+        public static string Add_New_Visibility_Area {
+            get {
+                return ResourceManager.GetString("Add_New_Visibility_Area", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Add User.
+        /// </summary>
+        public static string Add_User {
+            get {
+                return ResourceManager.GetString("Add_User", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Add Visibility Area.
         /// </summary>
         public static string Add_Visibility_Area {
@@ -111,6 +138,15 @@ namespace FinalKPLibrary.Resources {
         public static string BeenLogout {
             get {
                 return ResourceManager.GetString("BeenLogout", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Your browser does not support PDF viewing.
+        /// </summary>
+        public static string BrowserNotSupportPDFViewing {
+            get {
+                return ResourceManager.GetString("BrowserNotSupportPDFViewing", resourceCulture);
             }
         }
         
@@ -196,6 +232,33 @@ namespace FinalKPLibrary.Resources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Download the document.
+        /// </summary>
+        public static string Download_the_document {
+            get {
+                return ResourceManager.GetString("Download_the_document", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Download PDF.
+        /// </summary>
+        public static string DownloadPDF {
+            get {
+                return ResourceManager.GetString("DownloadPDF", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Error loading the document.
+        /// </summary>
+        public static string Error_loading_the_document {
+            get {
+                return ResourceManager.GetString("Error_loading_the_document", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на File Path.
         /// </summary>
         public static string File_Path {
@@ -210,6 +273,15 @@ namespace FinalKPLibrary.Resources {
         public static string FileNotFound {
             get {
                 return ResourceManager.GetString("FileNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Go back to the list of documents.
+        /// </summary>
+        public static string Go_back_to_the_list_of_documents {
+            get {
+                return ResourceManager.GetString("Go_back_to_the_list_of_documents", resourceCulture);
             }
         }
         
@@ -232,11 +304,29 @@ namespace FinalKPLibrary.Resources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Login.
+        /// </summary>
+        public static string LoginIn {
+            get {
+                return ResourceManager.GetString("LoginIn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Logout.
         /// </summary>
         public static string Logout {
             get {
                 return ResourceManager.GetString("Logout", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на My Documents.
+        /// </summary>
+        public static string My_Documents {
+            get {
+                return ResourceManager.GetString("My_Documents", resourceCulture);
             }
         }
         
@@ -277,6 +367,15 @@ namespace FinalKPLibrary.Resources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Please.
+        /// </summary>
+        public static string Please {
+            get {
+                return ResourceManager.GetString("Please", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Privacy.
         /// </summary>
         public static string Privacy {
@@ -313,6 +412,15 @@ namespace FinalKPLibrary.Resources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на to access more features.
+        /// </summary>
+        public static string To_access_more_features {
+            get {
+                return ResourceManager.GetString("To_access_more_features", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Topic.
         /// </summary>
         public static string Topic {
@@ -327,6 +435,15 @@ namespace FinalKPLibrary.Resources {
         public static string Type {
             get {
                 return ResourceManager.GetString("Type", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Unsupported document format.
+        /// </summary>
+        public static string Unsupported_document_format {
+            get {
+                return ResourceManager.GetString("Unsupported_document_format", resourceCulture);
             }
         }
         
@@ -358,6 +475,24 @@ namespace FinalKPLibrary.Resources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Uploaded.
+        /// </summary>
+        public static string Uploaded {
+            get {
+                return ResourceManager.GetString("Uploaded", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Uploading a document.
+        /// </summary>
+        public static string UploadingDocument {
+            get {
+                return ResourceManager.GetString("UploadingDocument", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на User Details.
         /// </summary>
         public static string User_Details {
@@ -385,11 +520,65 @@ namespace FinalKPLibrary.Resources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Users Management.
+        /// </summary>
+        public static string Users_Management {
+            get {
+                return ResourceManager.GetString("Users_Management", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на View.
+        /// </summary>
+        public static string View {
+            get {
+                return ResourceManager.GetString("View", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на View Document.
+        /// </summary>
+        public static string View_Document {
+            get {
+                return ResourceManager.GetString("View_Document", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Visibility Area.
         /// </summary>
         public static string Visibility_Area {
             get {
                 return ResourceManager.GetString("Visibility_Area", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Visibility Area Name.
+        /// </summary>
+        public static string Visibility_Area_Name {
+            get {
+                return ResourceManager.GetString("Visibility_Area_Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Visibility Areas List.
+        /// </summary>
+        public static string Visibility_Areas_List {
+            get {
+                return ResourceManager.GetString("Visibility_Areas_List", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Visibility Areas Management.
+        /// </summary>
+        public static string Visibility_Areas_Management {
+            get {
+                return ResourceManager.GetString("Visibility_Areas_Management", resourceCulture);
             }
         }
         

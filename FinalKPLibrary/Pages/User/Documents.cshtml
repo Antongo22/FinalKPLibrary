@@ -1,15 +1,15 @@
 ﻿@page
 @model DocumentsModel
 @{
-    ViewData["Title"] = "My Documents";
+    ViewData["Title"] = @Resources.Resource.My_Documents;
 }
 
-<h2>My Documents</h2>
+<h2>@Resources.Resource.My_Documents</h2>
 
 <form method="get" class="position-relative">
     <div class="input-group">
-        <input type="text" id="searchInput" name="searchQuery" placeholder="Search..." value="@Model.SearchQuery" class="form-control" />
-        <button type="submit" class="btn btn-primary">Search</button>
+        <input type="text" id="searchInput" name="searchQuery" placeholder="@Resources.Resource.Search..." value="@Model.SearchQuery" class="form-control" />
+        <button type="submit" class="btn btn-primary">@Resources.Resource.Search</button>
         <button type="button" id="clearSearch" class="btn btn-secondary" style="display: none;">❌</button>
     </div>
 </form>
@@ -17,12 +17,12 @@
 <table class="table mt-3">
     <thead>
         <tr>
-            <th><a asp-page="./Documents" asp-route-sortBy="Name" asp-route-sortOrder="@Model.NextSortOrder" asp-route-searchQuery="@Model.SearchQuery">Name</a></th>
-            <th><a asp-page="./Documents" asp-route-sortBy="Description" asp-route-sortOrder="@Model.NextSortOrder" asp-route-searchQuery="@Model.SearchQuery">Description</a></th>
-            <th><a asp-page="./Documents" asp-route-sortBy="Topic" asp-route-sortOrder="@Model.NextSortOrder" asp-route-searchQuery="@Model.SearchQuery">Topic</a></th>
-            <th><a asp-page="./Documents" asp-route-sortBy="UploadDate" asp-route-sortOrder="@Model.NextSortOrder" asp-route-searchQuery="@Model.SearchQuery">Upload Date</a></th>
-            <th>Visibility Areas</th>
-            <th>Actions</th>
+            <th><a asp-page="./Documents" asp-route-sortBy="Name" asp-route-sortOrder="@Model.NextSortOrder" asp-route-searchQuery="@Model.SearchQuery">@Resources.Resource.Name</a></th>
+            <th><a asp-page="./Documents" asp-route-sortBy="Description" asp-route-sortOrder="@Model.NextSortOrder" asp-route-searchQuery="@Model.SearchQuery">@Resources.Resource.Description</a></th>
+            <th><a asp-page="./Documents" asp-route-sortBy="Topic" asp-route-sortOrder="@Model.NextSortOrder" asp-route-searchQuery="@Model.SearchQuery">@Resources.Resource.Topic</a></th>
+            <th><a asp-page="./Documents" asp-route-sortBy="UploadDate" asp-route-sortOrder="@Model.NextSortOrder" asp-route-searchQuery="@Model.SearchQuery">@Resources.Resource.Upload_Date</a></th>
+            <th>@Resources.Resource.VisibilityAreas</th>
+            <th>@Resources.Resource.Actions</th>
         </tr>
     </thead>
     <tbody>
@@ -37,7 +37,7 @@
                     @string.Join(", ", doc.DocVisibilityAreas.Select(dva => dva.VisibilityArea.Name))
                 </td>
                 <td>
-                    <a asp-page="/User/ViewDocument" asp-route-id="@doc.Id">View</a>
+                    <a asp-page="/User/ViewDocument" asp-route-id="@doc.Id">@Resources.Resource.View</a>
                 </td>
             </tr>
         }

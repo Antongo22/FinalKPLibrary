@@ -126,6 +126,15 @@
   <data name="Add" xml:space="preserve">
     <value>Add</value>
   </data>
+  <data name="Add_New_User" xml:space="preserve">
+    <value>Add New User</value>
+  </data>
+  <data name="Add_New_Visibility_Area" xml:space="preserve">
+    <value>Add New Visibility Area</value>
+  </data>
+  <data name="Add_User" xml:space="preserve">
+    <value>Add User</value>
+  </data>
   <data name="Add_Visibility_Area" xml:space="preserve">
     <value>Add Visibility Area</value>
   </data>
@@ -134,6 +143,9 @@
   </data>
   <data name="BeenLogout" xml:space="preserve">
     <value>You have been logged out.</value>
+  </data>
+  <data name="BrowserNotSupportPDFViewing" xml:space="preserve">
+    <value>Your browser does not support PDF viewing</value>
   </data>
   <data name="ChooseFile" xml:space="preserve">
     <value>Choose a file</value>
@@ -162,11 +174,23 @@
   <data name="Document_Details" xml:space="preserve">
     <value>Document Details</value>
   </data>
+  <data name="DownloadPDF" xml:space="preserve">
+    <value>Download PDF</value>
+  </data>
+  <data name="Download_the_document" xml:space="preserve">
+    <value>Download the document</value>
+  </data>
+  <data name="Error_loading_the_document" xml:space="preserve">
+    <value>Error loading the document</value>
+  </data>
   <data name="FileNotFound" xml:space="preserve">
     <value>The document was not found</value>
   </data>
   <data name="File_Path" xml:space="preserve">
     <value>File Path</value>
+  </data>
+  <data name="Go_back_to_the_list_of_documents" xml:space="preserve">
+    <value>Go back to the list of documents</value>
   </data>
   <data name="Home" xml:space="preserve">
     <value>Home</value>
@@ -174,8 +198,14 @@
   <data name="Login" xml:space="preserve">
     <value>Login</value>
   </data>
+  <data name="LoginIn" xml:space="preserve">
+    <value>Login</value>
+  </data>
   <data name="Logout" xml:space="preserve">
     <value>Logout</value>
+  </data>
+  <data name="My_Documents" xml:space="preserve">
+    <value>My Documents</value>
   </data>
   <data name="Name" xml:space="preserve">
     <value>Name</value>
@@ -188,6 +218,9 @@
   </data>
   <data name="Password" xml:space="preserve">
     <value>Password</value>
+  </data>
+  <data name="Please" xml:space="preserve">
+    <value>Please</value>
   </data>
   <data name="Privacy" xml:space="preserve">
     <value>Privacy</value>
@@ -204,11 +237,23 @@
   <data name="Topic" xml:space="preserve">
     <value>Topic</value>
   </data>
+  <data name="To_access_more_features" xml:space="preserve">
+    <value>to access more features</value>
+  </data>
   <data name="Type" xml:space="preserve">
     <value>Type</value>
   </data>
+  <data name="Unsupported_document_format" xml:space="preserve">
+    <value>Unsupported document format</value>
+  </data>
   <data name="Upload" xml:space="preserve">
     <value>Upload</value>
+  </data>
+  <data name="Uploaded" xml:space="preserve">
+    <value>Uploaded</value>
+  </data>
+  <data name="UploadingDocument" xml:space="preserve">
+    <value>Uploading a document</value>
   </data>
   <data name="Upload_Date" xml:space="preserve">
     <value>Upload Date</value>
@@ -222,14 +267,32 @@
   <data name="Users" xml:space="preserve">
     <value>Users</value>
   </data>
+  <data name="Users_Management" xml:space="preserve">
+    <value>Users Management</value>
+  </data>
   <data name="User_Details" xml:space="preserve">
     <value>User Details</value>
+  </data>
+  <data name="View" xml:space="preserve">
+    <value>View</value>
+  </data>
+  <data name="View_Document" xml:space="preserve">
+    <value>View Document</value>
   </data>
   <data name="VisibilityAreas" xml:space="preserve">
     <value>Visibility Areas</value>
   </data>
   <data name="Visibility_Area" xml:space="preserve">
     <value>Visibility Area</value>
+  </data>
+  <data name="Visibility_Areas_List" xml:space="preserve">
+    <value>Visibility Areas List</value>
+  </data>
+  <data name="Visibility_Areas_Management" xml:space="preserve">
+    <value>Visibility Areas Management</value>
+  </data>
+  <data name="Visibility_Area_Name" xml:space="preserve">
+    <value>Visibility Area Name</value>
   </data>
   <data name="Welcome" xml:space="preserve">
     <value>Welcome</value>

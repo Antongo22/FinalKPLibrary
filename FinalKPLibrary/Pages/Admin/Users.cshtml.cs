@@ -51,7 +51,7 @@ public class UsersModel : PageModel
 
         if (Users.Any(u => u.UserName == username) || username.ToString().Contains("admin"))
         {
-            ModelState.AddModelError(string.Empty, "ѕользователь с таким именем уже существует.");
+            ModelState.AddModelError(string.Empty, "A user with that name already exists.");
             return Page(); 
         }
 

@@ -26,7 +26,6 @@ public class VisibilityAreasModel : PageModel
             RedirectToPage("/Account/AccessDenied");
         }
 
-        // Загружаем все зоны видимости
         VisibilityAreas = await _context.VisibilityAreas.ToListAsync();
     }
 
@@ -46,7 +45,7 @@ public class VisibilityAreasModel : PageModel
 
         if (VisibilityAreas.Any(v => v.Name == name) )
         {
-            ModelState.AddModelError(string.Empty, "Область с таким именем уже существует.");
+            ModelState.AddModelError(string.Empty, "An area with that name already exists.");
             return Page();
         }
 
